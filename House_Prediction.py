@@ -285,4 +285,18 @@ for feature in categorical_feature:
 
 
 
+final_dataset=pd.read_csv('Final_datset.csv')
+final_dataset.head()
+final_dataset1=pd.concat([final_dataset,saleprice_target],axis=1)
+final_dataset1.head()
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 
+X=final_dataset1.drop('SalePrice',axis=1)
+y=final_dataset1['SalePrice']
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3,random_state=42)
+from sklearn.metrics import r2_score
+
+r2 = r2_score(y_test, y_pred)
+print('R-squared (R2):', r2)
