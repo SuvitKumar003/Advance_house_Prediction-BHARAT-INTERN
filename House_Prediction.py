@@ -298,5 +298,9 @@ y=final_dataset1['SalePrice']
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3,random_state=42)
 from sklearn.metrics import r2_score
 
-r2 = r2_score(y_test, y_pred)
-print('R-squared (R2):', r2)
+from pycaret.regression import *
+import pandas as pd
+setup(data=final_dataset1, target='SalePrice', verbose=False)
+cm=compare_models(fold=5)
+gbr_model=create_model('gbr')
+tuned_model=tune_model(gbr_model)
